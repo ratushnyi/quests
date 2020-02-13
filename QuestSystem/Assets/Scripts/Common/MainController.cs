@@ -65,16 +65,6 @@ public class MainController : MonoBehaviour, IMainController
             {
                 var availableQuest = _questLine.First(t => !t.IsComplete);
 
-                if (availableQuest == null)
-                {
-                    OnQuestLinesNeedToUpdate?.Invoke(_questLine);
-
-                    if (availableQuest == null)
-                    {
-                        return;
-                    }
-                }
-
                 Debug.Log($"You try to pass the {availableQuest.Name}");
 
                 StartCoroutine(TestCoroutine(availableQuest));

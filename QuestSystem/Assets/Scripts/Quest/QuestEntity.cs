@@ -35,6 +35,11 @@ public class QuestEntity : ScriptableObject, IQuest
             }
         }
 
+        if (EnergyCosts > usedData.Energy)
+        {
+            AddCause(ref result, ref causes, $"yours level of energy is too low, you need min {EnergyCosts} points of energy");
+        }
+
         causes += ".";
         return (result, causes);
     }
