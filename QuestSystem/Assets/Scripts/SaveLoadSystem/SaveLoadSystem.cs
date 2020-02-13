@@ -7,6 +7,11 @@ public class SaveLoadSystem
 {
     public static T Load<T>() where T : ISaveable
     {
+        if (!File.Exists(Application.streamingAssetsPath))
+        {
+            Directory.CreateDirectory(Application.streamingAssetsPath);
+        }
+
         string name = typeof(T).ToString();
         string savedName = Base64Encode(name);
         string folderPath = Application.streamingAssetsPath;
@@ -31,16 +36,12 @@ public class SaveLoadSystem
 
     static string Base64Decode(string base64EncodedData)
     {
-        return base64EncodedData;
-
         byte[] base64EncodedBytes = Convert.FromBase64String(base64EncodedData);
         return Encoding.UTF8.GetString(base64EncodedBytes);
     }
 
     static string Base64Encode(string plainText)
     {
-        return plainText;
-
         byte[] plainTextBytes = Encoding.UTF8.GetBytes(plainText);
         return Convert.ToBase64String(plainTextBytes);
     }
